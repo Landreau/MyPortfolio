@@ -1,0 +1,17 @@
+[
+  {
+    "name": "home",
+    "src": "images/",
+    "alt": "woman with glasses holding a tablet"
+  },
+  {
+    "name": "about",
+    "src": "images/",
+    "alt": "gray abstract background"
+  },
+  {
+    "name": "portfolio",
+    "src": "images/home-office.jpg",
+    "alt": "desktop with books and laptop"
+  }
+]

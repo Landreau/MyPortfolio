@@ -1,0 +1,31 @@
+@using System
+@using System.Collections.Generic
+
+@typeparam TKey
+
+<ul class="skills-list">
+    @for (int i = 0; i < Skills.Count; i++)
+    {
+        var skill = Skills[i];
+        var imgName = GetSkillImageName(skill);
+        <li @key="GetKey(skill, i)">
+            <img class="skill-icon" src="images/skills/@imgName" alt="@skill" loading="lazy"
+                 onerror="this.onerror=null;this.src='images/skills/default.png';" />
+            @skill
+        </li>
+    }
+</ul>
+
+@code {
+    [Parameter, EditorRequired]
+    public required List<string> Skills { get; set; }
+
+    [Parameter]
+    public Func<string, int, object>? KeySelector { get; set; }
+
+    private object GetKey(string skill, int index)
+        => KeySelector?.Invoke(skill, index) ?? $"{skill}-{index}";
+
+    private string GetSkillImageName(string skill)
+        => skill.ToLower().Replace("c#", "csharp").Replace(" ", "").Replace("+", "plus") + ".png";
+}

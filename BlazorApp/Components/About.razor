@@ -1,0 +1,55 @@
+@inject IJSRuntime JS
+
+<section class="about-gradient" id="about">
+    @if (hero is not null)
+    {
+        <img class="background0" src="@(hero.Src)" alt="@(hero.Alt)" />
+    }
+    <div class="about-frame">
+        <h2>About Myself</h2>
+        <div class="about-content">
+            @if (aboutMe is null)
+            {
+                <p><em>Loading...</em></p>
+            }
+            else
+            {
+                <p class="large">@aboutMe.Description</p>
+                <p class="large">@aboutMe?.DetailOrQuote</p>
+                <hr />
+                <h3 class="skills-title">Skills</h3>
+                <SkillList Skills="aboutMe.Skills" TKey="string" />
+            }
+        </div>
+    </div>
+</section>
+
+@code {
+    [Parameter, EditorRequired]
+    public required HttpClient Http { get; set; }
+
+    [Parameter, EditorRequired]
+    public required HeroImageService HeroImageService { get; set; }
+
+    private AboutMe? aboutMe;
+    private HeroImage? hero;
+
+    protected override async Task OnInitializedAsync()
+    {
+        aboutMe = await Http.GetFromJsonAsync<AboutMe>("sample-data/aboutme.json");
+        hero = await HeroImageService.GetHeroAsync(img => img.Name is "about");
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("observeAboutFrame", "about", "about-frame");
+        }
+    }
+
+    private string GetSkillImageName(string skill)
+    {
+        return skill.ToLower().Replace("c#", "csharp").Replace(" ", "").Replace("+", "plus") + ".png";
+    }
+}
