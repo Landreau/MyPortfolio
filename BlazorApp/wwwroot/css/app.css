@@ -272,30 +272,41 @@ img.social-icon {
     padding: 0;
     margin: 2rem auto;
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colonnes */
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* modifié */
     gap: 1.5rem 2.5rem;
     max-width: 900px;
     width: 100%;
+    word-break: break-word; /* ajouté */
 }
 
 @media (max-width: 900px) {
     .skills-list {
-        grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur mobile/tablette */
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* modifié */
         margin: 2rem 0.5rem;
         max-width: 500px;
+    }
+}
+
+@media (max-width: 500px) {
+    .skills-list {
+        grid-template-columns: 1fr; /* une seule colonne sur mobile */
+        margin: 1rem 0.2rem;
+        max-width: 100%;
     }
 }
 
 .skills-list li {
     display: flex;
     align-items: center;
-    font-size: 1.45rem; /* plus grand */
+    font-size: 1.45rem;
     gap: 1.2rem;
     padding: 0.7rem 1.2rem;
     transition: 
         transform 0.25s cubic-bezier(0.23, 1, 0.32, 1),
         background 0.2s;
     box-shadow: 0 2px 8px rgba(78,86,126,0.04);
+    word-break: break-word; /* ajouté */
+    white-space: normal;    /* ajouté */
 }
 
 .skills-list li:focus {
