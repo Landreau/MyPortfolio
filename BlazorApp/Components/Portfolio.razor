@@ -1,34 +1,98 @@
-<section class="light" id="portfolio">
-    <h2>Portfolio</h2>
-    <div class="portfolio-container">
-    @if (projects is null)
-    {
-        <p><em>Loading...</em></p>
-    }
-    else
-    {
-        <div class="container">
-            @foreach (var project in projects)
+<section class="home-hero-gradient portfolio-section portfolio-animate" id="portfolio">
+    <div class="portfolio-frame">
+        <h3 class="portfolio-subtitle">My projects</h3>
+        <div class="portfolio-container">
+            @if (projects is null)
             {
-                <div class="box" key="@project.Title">
-                    <a href="@project.Url" target="_blank" rel="noopener noreferrer">
-                        <h3 style="flex-basis: 40px;">@project.Title</h3>
-                    </a>
-                    <p class="small">@project.Description</p>
+                <p><em>Loading...</em></p>
+            }
+            else
+            {
+                <div class="portfolio-grid">
+                    @foreach (var tuple in projects.Take(projectsToShow).Select((project, idx) => (project, idx)))
+                    {
+                        var key = $"project-{tuple.idx}";
+                        <div class="portfolio-card" key="@key">
+                            <img src="@tuple.project.ImageUrl" alt="@tuple.project.Title" class="portfolio-thumb" />
+                            <a href="@tuple.project.Url" target="_blank" rel="noopener noreferrer">
+                                <h3>@tuple.project.Title</h3>
+                            </a>
+                            <p class="portfolio-desc">
+                                @{
+                                    const int maxLength = 120;
+                                    var isExpanded = expandedProjects.TryGetValue(key, out var expanded) && expanded;
+                                    var needsReadMore = tuple.project.Description?.Length > maxLength;
+                                    var shortDesc = needsReadMore ? tuple.project.Description.Substring(0, maxLength) + "..." : tuple.project.Description;
+                                }
+                                @if (isExpanded || !needsReadMore)
+                                {
+                                    @tuple.project.Description
+                                }
+                                else
+                                {
+                                    @shortDesc
+                                }
+                            </p>
+                            @if (needsReadMore)
+                            {
+                                <button class="readmore-btn" @onclick="() => ToggleReadMore(key)">
+                                    @(isExpanded ? "Lire moins" : "Lire plus")
+                                </button>
+                            }
+                        </div>
+                    }
                 </div>
+                @if (projects.Count > projectsToShow)
+                {
+                    <div class="load-more-container">
+                        <button class="btn btn-primary" @onclick="LoadMore">Load More</button>
+                    </div>
+                }
             }
         </div>
-    }
     </div>
 </section>
 
 @code {
+    [Inject] IJSRuntime JS { get; set; } = default!;
     [Parameter, EditorRequired]
     public required HttpClient Http { get; set; }
 
+    [Parameter, EditorRequired]
+    public required HeroImageService HeroImageService { get; set; }
+    private int projectsToShow = 4;
+
     private List<Project>? projects;
+    private HeroImage? hero;
+    private Dictionary<string, bool> expandedProjects = new();
+
     protected override async Task OnInitializedAsync()
     {
         projects = await Http.GetFromJsonAsync<List<Project>>("sample-data/projects.json");
+        hero = await HeroImageService.GetHeroAsync(img => img.Name is "portfolio");
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("observePortfolioSection", "portfolio", "portfolio-animate");
+        }
+    }
+
+    private void LoadMore()
+    {
+        if (projects is not null)
+        {
+            projectsToShow = Math.Min(projectsToShow + 4, projects.Count);
+        }
+    }
+
+    private void ToggleReadMore(string key)
+    {
+        if (expandedProjects.ContainsKey(key))
+            expandedProjects[key] = !expandedProjects[key];
+        else
+            expandedProjects[key] = true;
     }
 }

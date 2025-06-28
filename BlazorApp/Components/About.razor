@@ -5,6 +5,7 @@
     {
         <img class="background0" src="@(hero.Src)" alt="@(hero.Alt)" />
     }
+    <hr />
     <div class="about-frame">
         <h2>About Myself</h2>
         <div class="about-content">
@@ -18,7 +19,14 @@
                 <p class="large">@aboutMe?.DetailOrQuote</p>
                 <hr />
                 <h3 class="skills-title">Skills</h3>
-                <SkillList Skills="aboutMe.Skills" TKey="string" />
+                @if (aboutMe.Skills is not null && aboutMe.Skills.Any())
+                {
+                    <SkillList Skills="aboutMe.Skills" TKey="string" />
+                }
+                else
+                {
+                    <p><em>No skills available.</em></p>
+                }
             }
         </div>
     </div>
