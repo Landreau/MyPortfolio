@@ -112,18 +112,17 @@ h1 {
 }
 
 .about-frame {
-    background: rgba(255,255,255,0.2); /* transparent white */
+    background: rgba(255,255,255,0.2);
     border: 2px solid #888;
     border-radius: 1.5rem;
     padding: 2rem 0;
-    width: 60%;
-    margin: 3rem auto;
+    width: 80%;
+    max-width: 1200px;
+    margin: 3rem auto 0 auto;
     box-shadow: 0 4px 24px rgba(0,0,0,0.08);
     backdrop-filter: blur(2px);
     opacity: 0;
     transition: opacity 0.4s;
-    width: 80%; /* élargit le cadre sur les grands écrans */
-    max-width: 1200px; /* limite la largeur maximale */
 }
 
     .about-frame.visible {
@@ -132,8 +131,12 @@ h1 {
     }
 
 .about-content {
-    width: 95%; /* occupe presque toute la largeur du cadre */
-    max-width: 1100px; /* limite la largeur sur très grands écrans */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centre horizontalement le contenu */
+    justify-content: center;
+    width: 95%;
+    max-width: 1100px;
     min-width: 220px;
     margin: 0 auto;
     background: transparent;
@@ -145,6 +148,7 @@ h1 {
         .about-frame {
             width: 98%;
             padding: 1rem 0.5rem;
+            margin: 2rem auto 0 auto;
         }
 
         .about-content {
@@ -162,6 +166,7 @@ h1 {
         .about-frame {
             width: 98%;
             padding: 1rem 0.5rem;
+            margin: 1rem auto 0 auto;
         }
     }
 
@@ -361,6 +366,7 @@ img.social-icon {
     gap: 1.5rem 2.5rem;
     max-width: 900px;
     width: 100%;
+    /*justify-items: center; centre les items dans la grille */
 }
 
 @media (max-width: 900px) {
@@ -371,9 +377,17 @@ img.social-icon {
     }
 }
 
+@media (max-width: 600px) {
+    .skills-list {
+        grid-template-columns: repeat(2, 1fr); /* 2 colonnes */
+        margin: 1.5rem 0.2rem;
+        max-width: 100%;
+    }
+}
+
 .skills-list li {
     display: flex;
-    align-items: center;
+    /**/align-items: center;
     font-size: 1.45rem; /* plus grand */
     gap: 1.2rem;
     padding: 0.7rem 1.2rem;
@@ -494,6 +508,7 @@ img.social-icon {
     width: 100%;
     background: linear-gradient(120deg, #1a2233 0%, #3a4a6b 100%);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
@@ -642,6 +657,18 @@ img.social-icon {
     width: 100%;
 }
 
+@media (max-width: 600px) {
+    .portfolio-grid {
+        grid-template-columns: 1fr; /* 1 colonne */
+        justify-items: center;      /* centre les cards */
+    }
+    .portfolio-card {
+        max-width: 340px;           /* largeur max pour éviter d'être trop large */
+        width: 100%;
+        margin: 0 auto;
+    }
+}
+
 .portfolio-card {
     background: rgba(30,40,60,0.92);
     border-radius: 1.2rem;
@@ -733,4 +760,37 @@ img.social-icon {
 .readmore-btn:hover {
     color: #4e567e;
     text-decoration: underline;
+}
+
+.scroll-down-arrow {
+    position: absolute;
+    left: 50%;
+    bottom: 2.5rem; /* valeur raisonnable pour desktop */
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.scroll-down-arrow img {
+    height: 3rem;
+    width: 3rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.scroll-down-arrow img:hover {
+    transform: scale(1.15);
+}
+
+/* Responsivité pour petits écrans */
+@media (max-width: 600px) {
+    .scroll-down-arrow {
+        bottom: 1rem; /* un peu plus bas sur mobile */
+    }
+    .scroll-down-arrow img {
+        height: 2.2rem;
+        width: 2.2rem;
+    }
 }
