@@ -2,21 +2,49 @@
   {
     "title": "10 Things To Know About Azure Static Web Apps 🎉",
     "description": "Collaboration to create a beginner friendly article to help explain Azure Static Web Apps and tooling to get started.",
-    "url": "https://dev.to/azure/10-things-to-know-about-azure-static-web-apps-3n4i"
+    "url": "https://dev.to/azure/10-things-to-know-about-azure-static-web-apps-3n4i",
+    "imageUrl": "images/projects_thumbs/AzureStaticWebApps.jpg"
   },
   {
     "title": "Web Development for Beginners",
     "description": "Contributed sketch note imagery to accompany each lesson. These help provide visual representation of what is being taught.",
-    "url": "https://github.com/microsoft/web-dev-for-beginners"
+    "url": "https://github.com/microsoft/web-dev-for-beginners",
+    "imageUrl": "images/projects_thumbs/WebDevelopment.jpg"
   },
   {
     "title": "My Resume Site",
     "description": "Created from Microsoft's resume workshop and deployed to GitHub pages. Includes my experience and design abilities.",
-    "url": "https://github.com/microsoft/workshop-library/tree/main/full/build-resume-website"
+    "url": "https://landreau.github.io/resume/",
+    "imageUrl": "images/projects_thumbs/"
   },
   {
     "title": "GitHub Codespaces and github.dev",
     "description": "Video interview to explain when to use GitHub.dev versus GitHub Codespaces, and how best to use each tool.",
-    "url": "https://www.youtube.com/watch?v=c3hHhRME_XI"
+    "url": "https://www.youtube.com/watch?v=c3hHhRME_XI",
+    "imageUrl": "images/projects_thumbs/GitHub.jpg"
+  },
+  {
+    "title": "MAUI CalculatorApp",
+    "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+    "url": "",
+    "imageUrl": "images/projects_thumbs/CalculatorMaui.png"
+  },
+  {
+    "title": "IOT Development with Landry",
+    "description": "Video interview to explain how to program IOT Devices using C# and Dotnet, and how best to use each tool.",
+    "url": "https://www.youtube.com/watch?v=c3hHhRME_XI",
+    "imageUrl": "images/projects_thumbs/embeddedsystems.png"
+  },
+  {
+    "title": "Speech Translation using a Raspberry Pi",
+    "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.",
+    "url": "https://www.youtube.com/watch?v=c3hHhRME_XI",
+    "imageUrl": "images/projects_thumbs/TranslatorRasp.jpg"
+  },
+  {
+    "title": "E-Commerce Blazor WebApp",
+    "description": "BlazorShopOnline. An E-Commerce website builded with Dotnet and C-sharp(Blazor).",
+    "url": "https://github.com/Landreau/BlazorShopOnline",
+    "imageUrl": "images/projects_thumbs/BlazorEcommerce.jpg"
   }
 ]

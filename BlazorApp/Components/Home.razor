@@ -17,8 +17,8 @@
             <img src="images/hero-avatar.jpg" alt="Photo de profil" />
         </div>
     </div>
-    <div style="position: absolute; bottom: 8rem; left: 50%;">
-        <a href="#about" target="_top">
+    <div class="scroll-down-arrow" style="position: absolute; bottom: 8rem; left: 50%;">
+        <a href="javascript:void(0);" @onclick="ScrollToAbout">
             <img src="images/down-arrow.svg" style="height: 3rem; width: 3rem;" alt="scroll down" />
         </a>
     </div>
@@ -40,6 +40,11 @@
         aboutMe = await Http.GetFromJsonAsync<AboutMe>("sample-data/aboutme.json");
         property = await Http.GetFromJsonAsync<SiteProperties>("sample-data/siteproperties.json");
         hero = await HeroImageService.GetHeroAsync(img => img.Name is "home");
+    }
+
+    private async Task ScrollToAbout()
+    {
+        await JS.InvokeVoidAsync("smoothScrollToId", "about");
     }
 
 }
